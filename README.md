@@ -1,6 +1,8 @@
 # RouterOS Scanner
 
 Forensics tool for Mikrotik devices. Search for suspicious properties and weak security points that need to be fixed on the router.
+Forked by original script in https://github.com/microsoft/routeros-scanner, include two operation's mode: test a list of routers and 
+discover mode serach routers follow the routings tables. 
 
 This tool’s functionalities include the following: 
 - Get the version of the device and map it to CVEs 
@@ -18,16 +20,21 @@ This tool’s functionalities include the following:
 
  **args** | **Description**							                        | **Must / Optional**
 ----------| ----------------------------------------------------------------| -------------------
-`-i`	  | The tested Mikrotik IP address			                        | Must
+`-i`	  | The tested Mikrotik IP address			                        | Optional*
+`-l`	  | A comma separated tested Mikrotiks IPs address list file        | Optional*
+`-d`	  | Discover mode from root router IP                               | Optional*
 `-p`	  | The tested Mikrotik SSH port			                        | Must
 `-u`	  | User name with admin Permissions		                        | Must
 `-ps`     | The password of the given user name	(empty password by defoult)	| Optional
 `-J`	  | Print the results as json format (prints txt format by defoult)	| Optional
+*At least one of three must be informed
 
 ### Executing examples:
 	 ./main.py -i 1.2.3.4 -p 22 -u admin
 	 ./main.py -i 1.2.3.4 -p 2000 -u admin -ps 123456
 	 ./main.py -i 1.2.3.4 -p 2000 -u admin -ps 123456 -J
+	 ./main.py -l list_router.txt -p 22 -u admin
+	 ./main.py -d 1.2.3.4 -p 22 -u admin
 
 ### Output:
 The output includes 3 sections for each test:
@@ -42,9 +49,6 @@ This project welcomes contributions and suggestions.  Most contributions require
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
